@@ -45,13 +45,8 @@ function markTodoCompleted() {
   // 5. Beri feedback ke user bahwa to-do berhasil ditandai selesai
   // 6. Tangani kasus jika to-do sudah selesai
 
-  if (todos.length === 0) {
-    console.log("No to-do items to mark.\n");
-    return;
-  }
-
   listTodos();
-  const input = prompt("Enter the NUMBER of the to-do to delete: ");
+  const input = prompt("Enter the NUMBER of the to-do to mark as completed: ");
   const index = Number(input) - 1;
 
   if (isNaN(index) || index < 0 || index >= todos.length) {
@@ -77,10 +72,6 @@ function deleteTodo() {
   // 3. Validasi input: Pastikan nomor adalah angka, dalam rentang yang valid
   // 4. Hapus to-do yang dipilih dari array `todos`
   // 5. Beri feedback ke user bahwa to-do berhasil dihapus
-  if (todos.length === 0) {
-    console.log("No to-do items to delete.\n");
-    return;
-  }
 
   listTodos();
   const input = prompt("Enter the NUMBER of the to-do to delete: ");
@@ -137,29 +128,38 @@ function runTodoApp() {
     console.log("4. List");
     console.log("5. Exit");
 
-    const choice = prompt("Enter your choice: ").trim();
+    const choice = prompt("Enter your choice: ").trim().toLowerCase();
     console.log(""); // spacing
 
     switch (choice) {
       case "1":
+      case "add":
         addTodo();
         break;
+
       case "2":
+      case "complete":
         markTodoCompleted();
         break;
+
       case "3":
+      case "delete":
         deleteTodo();
         break;
+
       case "4":
+      case "list":
         listTodos();
         break;
+
       case "5":
+      case "exit":
         console.log("👋 Exiting To-Do App. Goodbye!\n");
         return;
+
       default:
-        console.log(
-          "Invalid number. Please enter a valid number from the list."
-        );
+        console.log("Invalid number. Please enter a valid number from the list.");
+        continue;
     }
   }
 }
